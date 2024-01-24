@@ -50,7 +50,7 @@ configmapReload:
   prometheus:
     ## If false, the configmap-reload container will not be deployed
     ##
-    enabled: true
+    enabled: false #true
 
     ## configmap-reload container name
     ##
@@ -713,49 +713,49 @@ scrapeConfigFiles: []
 ##
 serverFiles:
   ## Alerts configuration
-  ### Ref: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
-  #alerting_rules.yml:
-  #  groups:
-  #  - name: rules.yaml
-  #    rules:
-  #    - alert: HighCPUUtilization
-  #      expr: avg(node_cpu{mode="system"}) > 80
-  #      for: 5m
-  #      labels:
-  #        severity: critical
-#
-  #    - alert: LowDiskSpace
-  #      expr: node_filesystem_free{fstype="ext4"} < 1e9
-  #      for: 5m
-  #      labels:
-  #        severity: critical
-  #    
-  #    - alert: HighRequestErrorRate
-  #      expr: (sum(rate(http_requests_total{status="500"}[5m])) /
-  #            sum(rate(http_requests_total[5m]))) > 0.05
-  #      for: 5m
-  #      labels:
-  #        severity: critical
-#
-  #    - alert: NodeDown
-  #      expr: up == 0
-  #      for: 5m
-  #      labels:
-  #        severity: critical
-#
-  #    - alert: HighMemoryUtilization
-  #      expr: node_memory_MemTotal - node_memory_MemFree < 0.8 *
-  #            node_memory_MemTotal
-  #      for: 5m
-  #      labels:
-  #        severity: warning
-#
-  #    - alert: HighNetworkTraffic
-  #      expr: node_network_receive_bytes > 100e6
-  #      for: 5m
-  #      labels:
-  #        severity: warning
-  ## groups:
+  ## Ref: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
+  alerting_rules.yml:
+    groups:
+    - name: rules.yaml
+      rules:
+      - alert: HighCPUUtilization
+        expr: avg(node_cpu{mode="system"}) > 80
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: LowDiskSpace
+        expr: node_filesystem_free{fstype="ext4"} < 1e9
+        for: 5m
+        labels:
+          severity: critical
+      
+      - alert: HighRequestErrorRate
+        expr: (sum(rate(http_requests_total{status="500"}[5m])) /
+              sum(rate(http_requests_total[5m]))) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: NodeDown
+        expr: up == 0
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: HighMemoryUtilization
+        expr: node_memory_MemTotal - node_memory_MemFree < 0.8 *
+              node_memory_MemTotal
+        for: 5m
+        labels:
+          severity: warning
+
+      - alert: HighNetworkTraffic
+        expr: node_network_receive_bytes > 100e6
+        for: 5m
+        labels:
+          severity: warning
+  # groups:
   #   - name: Instances
   #     rules:
   #       - alert: InstanceDown
@@ -782,7 +782,7 @@ serverFiles:
     ## Below two files are DEPRECATED will be removed from this default values file
       - /etc/config/rules
       - /etc/config/alerts
-      #- rules.yaml
+      - rules.yaml
 
     # Alerting specifies settings related to the Alertmanager
     alerting:

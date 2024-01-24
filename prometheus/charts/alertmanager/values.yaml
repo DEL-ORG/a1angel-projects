@@ -130,7 +130,7 @@ servicePerReplica:
 
   # Service type
   #
-  type: ClusterIP
+  type: NodePort
 
 ingress:
   enabled: false

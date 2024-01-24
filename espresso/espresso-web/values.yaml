@@ -4,6 +4,9 @@
 
 replicaCount: 2
 
+secret:
+   name: redis-secret
+
 deploy:
    app: espresso-w
    name: espresso-web
@@ -18,8 +21,10 @@ env:
   value: http://espresso-shop-product-catalog-svc:8091
   name2: ReviewsUrl
   value2: http://espresso-shop-reviews-svc:8092
-
-
+  name3: REDIS_USER
+  value3: redis
+  name4: REDIS_HOST
+  value4: redis-redis-cluster
 image:
   repository: devopseasylearning/a1angel-espresso-web
   pullPolicy: Always

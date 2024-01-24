@@ -5,4 +5,4 @@ metadata:
 data:
   POSTGRES_USER: angel
   POSTGRES_DB: espresso
-  POSTGRES_HOST: {{ include "postgresql-ha.pgpool" . }}
+  POSTGRES_HOST: post-postgresql-ha-postgresql

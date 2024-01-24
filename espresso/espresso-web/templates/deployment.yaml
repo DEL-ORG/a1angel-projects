@@ -34,9 +34,13 @@ spec:
             value: {{ .Values.env.value }}
           - name: {{ .Values.env.name2 }}
             value: {{ .Values.env.value2 }}
+          - name: {{ .Values.env.name3 }}
+            value: {{ .Values.env.value3 }}
+          - name: {{ .Values.env.name4 }}
+            value: {{ .Values.env.value4 }}
           envFrom:
           - secretRef:
-               name: secret-redis
+               name: {{ .Values.secret-name }}
           ports:
             - name: http
               containerPort: {{ .Values.service.containerPort }}

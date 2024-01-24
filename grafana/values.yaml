@@ -96,7 +96,7 @@ image:
   # Overrides the Grafana image tag whose default is the chart appVersion
   tag: ""
   sha: ""
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
   ## Optionally specify an array of imagePullSecrets.
   ## Secrets must be manually created in the namespace.
@@ -607,7 +607,7 @@ datasources: {}
 ## Configure grafana alerting (can be templated)
 ## ref: http://docs.grafana.org/administration/provisioning/#alerting
 ##
-alerting: {}
+alerting: 
   # rules.yaml:
   #   apiVersion: 1
   #   groups:
@@ -673,7 +673,7 @@ alerting: {}
 ## Configure notifiers
 ## ref: http://docs.grafana.org/administration/provisioning/#alert-notification-channels
 ##
-notifiers: {}
+notifiers: 
 #  notifiers.yaml:
 #    notifiers:
 #    - name: email-notifier
@@ -712,7 +712,7 @@ dashboardProviders: {}
 ##
 ## dashboards per provider, use provider name as key.
 ##
-dashboards: {}
+dashboards: 
   # default:
   #   some-dashboard:
   #     json: |

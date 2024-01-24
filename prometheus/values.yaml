@@ -508,7 +508,7 @@ server:
 
   ## Prometheus AlertManager configuration
   ##
-  alertmanagers: []
+  alertmanagers: #[]
 
   ## Specify if a Pod Security Policy for node-exporter must be created
   ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/
@@ -653,7 +653,7 @@ server:
     enabled: true
 
     annotations: {}
-    labels: {}
+    labels: 
     clusterIP: {}
 
     ## List of IP addresses at which the Prometheus server service is available
@@ -702,7 +702,7 @@ server:
   retentionSize: ""
 
 ## Prometheus server ConfigMap entries for rule files (allow prometheus labels interpolation)
-ruleFiles: {}
+ruleFiles: 
 
 ## Prometheus server ConfigMap entries for scrape_config_files
 ## (allows scrape configs defined in additional files)
@@ -767,13 +767,13 @@ serverFiles:
   #           description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.'
   #           summary: 'Instance {{ $labels.instance }} down'
   ## DEPRECATED DEFAULT VALUE, unless explicitly naming your files, please use alerting_rules.yml
-  alerts: {}
+  alerts: 
 
   ## Records configuration
   ## Ref: https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/
-  recording_rules.yml: {}
+  recording_rules.yml: 
   ## DEPRECATED DEFAULT VALUE, unless explicitly naming your files, please use recording_rules.yml
-  rules: {}
+  rules: 
 
   prometheus.yml:
     rule_files:

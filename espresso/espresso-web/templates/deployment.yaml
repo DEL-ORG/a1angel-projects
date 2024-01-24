@@ -40,7 +40,7 @@ spec:
             value: {{ .Values.env.value4 }}
           envFrom:
           - secretRef:
-               name: {{ .Values.secret-name }}
+               name: {{ .Values.secret.name }}
           ports:
             - name: http
               containerPort: {{ .Values.service.containerPort }}

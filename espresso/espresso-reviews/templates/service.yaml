@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+  labels:
+    {{- include "espresso-reviews.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "espresso-reviews.selectorLabels" . | nindent 4 }}
+    {{- include "espresso-reviews.selectorLabels-2" . | nindent 4 }}
+

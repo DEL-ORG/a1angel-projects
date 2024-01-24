@@ -38,13 +38,7 @@ spec:
             value: {{ .Values.cm.value }}
           envFrom:
           - secretRef:
-               name: postgres-secret
-          - configMapRef:
-               name: postgres-cm
-         # envFrom:
-         # - configMapRef:
-         #    name: {{ .Values.configmap.name }}
-        
+               name: {{ .Values.secret.name }}
           ports:
             - name: http
               containerPort: {{ .Values.service.containerPort }}

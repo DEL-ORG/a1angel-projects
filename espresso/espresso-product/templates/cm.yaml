@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.postgresql.name.cm }} 
+  name: {{ .Values.cm.name }} 
 data:
   POSTGRES_USER: angel
   POSTGRES_DB: espresso

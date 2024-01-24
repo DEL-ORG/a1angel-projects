@@ -4,6 +4,12 @@
 
 replicaCount: 2
 
+secret:
+  name: prod-secret
+
+cm:
+ name: prod-cm
+
 hpa:
  name: espresso-prod-hpa
 

@@ -32,9 +32,9 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           envFrom:
           - secretRef:
-               name: postgres-secret
+               name: {{ .Values.secret.name }}
           - configMapRef:
-               name: postgres-cm
+               name: {{ .Values.cm.name }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

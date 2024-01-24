@@ -40,10 +40,7 @@ spec:
           - configMapRef:
              name: {{ .Values.configmap.name02 }}
           - secretRef:
-               name: postgres-secret
-          - configMapRef:
-               name: postgres-cm
-        
+               name: {{ .Values.secret.name }}
           ports:
             - name: http
               containerPort: {{ .Values.service.containerPort }}

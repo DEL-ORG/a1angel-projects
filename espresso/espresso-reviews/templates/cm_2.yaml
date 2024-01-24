@@ -4,3 +4,6 @@ metadata:
   name: {{ .Values.configmap.name02 }}
 data:
    SERVICE_VERSION: v2
+   POSTGRES_USER: angel
+   POSTGRES_DB: espresso
+   POSTGRES_HOST: {{ include "postgresql-ha.pgpool" . }}

@@ -63,7 +63,7 @@ configmapReload:
       tag: v0.70.0
       # When digest is set to a non-empty value, images will be pulled by digest (regardless of tag value).
       digest: ""
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
 
     # containerPort: 9533
 
@@ -168,7 +168,7 @@ server:
     tag: ""
     # When digest is set to a non-empty value, images will be pulled by digest (regardless of tag value).
     digest: ""
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
 
   ## Prometheus server command
   ##
@@ -654,7 +654,7 @@ server:
 
     annotations: {}
     labels: {}
-    clusterIP: ""
+    clusterIP: {}
 
     ## List of IP addresses at which the Prometheus server service is available
     ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips

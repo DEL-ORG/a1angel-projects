@@ -229,7 +229,7 @@ server:
     # - storage.tsdb.wal-compression
 
   ## Path to a configuration file on prometheus server container FS
-  configPath: /etc/config/prometheus.yml
+   configPath: /etc/config/prometheus.yml
 
   ### The data directory used by prometheus to set --storage.tsdb.path
   ### When empty server.persistentVolume.mountPath is used instead
@@ -714,47 +714,47 @@ scrapeConfigFiles: []
 serverFiles:
   ## Alerts configuration
   ## Ref: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
-  alerting_rules.yml:
-    groups:
-    - name: rules.yaml
-      rules:
-      - alert: HighCPUUtilization
-        expr: avg(node_cpu{mode="system"}) > 80
-        for: 5m
-        labels:
-          severity: critical
-
-      - alert: LowDiskSpace
-        expr: node_filesystem_free{fstype="ext4"} < 1e9
-        for: 5m
-        labels:
-          severity: critical
-      
-      - alert: HighRequestErrorRate
-        expr: (sum(rate(http_requests_total{status="500"}[5m])) /
-              sum(rate(http_requests_total[5m]))) > 0.05
-        for: 5m
-        labels:
-          severity: critical
-
-      - alert: NodeDown
-        expr: up == 0
-        for: 5m
-        labels:
-          severity: critical
-
-      - alert: HighMemoryUtilization
-        expr: node_memory_MemTotal - node_memory_MemFree < 0.8 *
-              node_memory_MemTotal
-        for: 5m
-        labels:
-          severity: warning
-
-      - alert: HighNetworkTraffic
-        expr: node_network_receive_bytes > 100e6
-        for: 5m
-        labels:
-          severity: warning
+  #alerting_rules.yml:
+  #  groups:
+  #  - name: rules.yaml
+  #    rules:
+  #    - alert: HighCPUUtilization
+  #      expr: avg(node_cpu{mode="system"}) > 80
+  #      for: 5m
+  #      labels:
+  #        severity: critical
+#
+  #    - alert: LowDiskSpace
+  #      expr: node_filesystem_free{fstype="ext4"} < 1e9
+  #      for: 5m
+  #      labels:
+  #        severity: critical
+  #    
+  #    - alert: HighRequestErrorRate
+  #      expr: (sum(rate(http_requests_total{status="500"}[5m])) /
+  #            sum(rate(http_requests_total[5m]))) > 0.05
+  #      for: 5m
+  #      labels:
+  #        severity: critical
+#
+  #    - alert: NodeDown
+  #      expr: up == 0
+  #      for: 5m
+  #      labels:
+  #        severity: critical
+#
+  #    - alert: HighMemoryUtilization
+  #      expr: node_memory_MemTotal - node_memory_MemFree < 0.8 *
+  #            node_memory_MemTotal
+  #      for: 5m
+  #      labels:
+  #        severity: warning
+#
+  #    - alert: HighNetworkTraffic
+  #      expr: node_network_receive_bytes > 100e6
+  #      for: 5m
+  #      labels:
+  #        severity: warning
   # groups:
   #   - name: Instances
   #     rules:
@@ -775,7 +775,7 @@ serverFiles:
   ## DEPRECATED DEFAULT VALUE, unless explicitly naming your files, please use recording_rules.yml
   rules: 
 
-  prometheus.yml:
+  prometheus.yaml:
     rule_files:
       - /etc/config/recording_rules.yml
       - /etc/config/alerting_rules.yml
@@ -785,12 +785,12 @@ serverFiles:
       - rules.yaml
 
     # Alerting specifies settings related to the Alertmanager
-    alerting:
-      alertmanagers:
-        - static_configs:
-          - targets:
-            # Alertmanager's default port is 9093
-            - localhost:9093
+   # alerting:
+   #   alertmanagers:
+   #     - static_configs:
+   #       - targets:
+   #         # Alertmanager's default port is 9093
+   #         - localhost:9093
 
 
     scrape_configs:

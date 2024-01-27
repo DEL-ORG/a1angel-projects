@@ -825,7 +825,7 @@ server:
     ## Enable metrics for Argo CD server
     ## @param server.metrics.enabled Enable metrics for the Argo CD server
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param server.metrics.service.type Argo CD server service type
       ##
@@ -879,7 +879,7 @@ server:
     serviceMonitor:
       ## @param server.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param server.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring
@@ -1395,7 +1395,7 @@ repoServer:
     ## Enable metrics for Argo CD repo server
     ## @param repoServer.metrics.enabled Enable metrics for the Argo CD repo server
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param repoServer.metrics.service.type Argo CD repo server service type
       ##
@@ -1449,7 +1449,7 @@ repoServer:
     serviceMonitor:
       ## @param repoServer.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param repoServer.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring
@@ -1836,7 +1836,7 @@ dex:
     ## Enable metrics for Argo Dex
     ## @param dex.metrics.enabled Enable metrics for Dex
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param dex.metrics.service.type Dex service type
       ##
@@ -1890,7 +1890,7 @@ dex:
     serviceMonitor:
       ## @param dex.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param dex.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring

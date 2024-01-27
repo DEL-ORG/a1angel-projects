@@ -24,7 +24,8 @@ fullnameOverride: ""
 
 ## Labels to apply to all resources
 ##
-commonLabels: {}
+commonLabels: 
+    release: kube-prometheus
 # scmhash: abc123
 # myLabel: aakkmd
 

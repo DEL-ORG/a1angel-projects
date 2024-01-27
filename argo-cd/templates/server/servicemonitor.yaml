@@ -15,7 +15,7 @@ metadata:
     {{- if .Values.server.metrics.serviceMonitor.selector }}
     {{- include "common.tplvalues.render" (dict "value" .Values.server.metrics.serviceMonitor.selector "context" $) | nindent 4 }}
     {{- end }}
-    release: prometheus
+    release: kube-prometheus
     app.kubernetes.io/component: server
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "common.tplvalues.render" (dict "value" .Values.commonAnnotations "context" $) | nindent 4 }}

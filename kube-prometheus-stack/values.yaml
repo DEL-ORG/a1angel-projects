@@ -2799,7 +2799,7 @@ prometheus:
 
     ## Port to expose on each node, if service type is NodePort
     ##
-    nodePort: 30820 #30901
+    nodePort: 30901
     httpNodePort: 30902
 
   # ServiceMonitor to scrape Sidecar metrics
@@ -2894,7 +2894,7 @@ prometheus:
 
     ## Service type
     ##
-    type: ClusterIP
+    type: NodePort
 
     ## Additional ports to open for Prometheus service
     ##

@@ -32,8 +32,8 @@ nameOverride: ""
 fullnameOverride: ""
 ## @param commonLabels Labels to add to all deployed objects
 ##
-commonLabels:
-        job: prometheus
+commonLabels: {}
+    
 ## @param commonAnnotations Annotations to add to all deployed objects
 ##
 commonAnnotations: {}

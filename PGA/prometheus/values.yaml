@@ -745,11 +745,13 @@ serverFiles:
     scrape_configs:
       - job_name: prometheus
         static_configs:
-          - targets:
-            - localhost:9090
-            - localhost:8082
-            - localhost:8083
-            - localhost:8084
+          - targets: 
+               - localhost:9090
+
+      - job_name: argocd
+        static_configs:
+          - labels: 
+               job: prometheus
 
       # A scrape configuration for running Prometheus on a Kubernetes cluster.
       # This uses separate scrape configs for cluster components (i.e. API server, node)
@@ -772,7 +774,7 @@ serverFiles:
 
         # Default to scraping over https. If required, just disable this or change to
         # `http`.
-        scheme: https
+        scheme: http
 
         # This TLS & bearer token file config is used to connect to the actual scrape
         # endpoints for cluster components. This is separate to discovery auth
@@ -803,7 +805,7 @@ serverFiles:
 
         # Default to scraping over https. If required, just disable this or change to
         # `http`.
-        scheme: https
+        scheme: http
 
         # This TLS & bearer token file config is used to connect to the actual scrape
         # endpoints for cluster components. This is separate to discovery auth

@@ -32,8 +32,8 @@ nameOverride: ""
 fullnameOverride: ""
 ## @param commonLabels Labels to add to all deployed objects
 ##
-commonLabels: {}
-        #app.kubernetes.io/name: prometheus
+commonLabels:
+        job: prometheus
 ## @param commonAnnotations Annotations to add to all deployed objects
 ##
 commonAnnotations: {}
@@ -388,7 +388,7 @@ controller:
     ## @param controller.metrics.rules.additionalLabels Additional lables to add to the PrometheusRule object
     ##
     rules:
-      enabled: false
+      enabled: true
       ## E.g
       ## - alert: ArgoAppMissing
       ##   expr: |

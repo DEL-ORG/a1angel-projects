@@ -33,6 +33,7 @@ fullnameOverride: ""
 ## @param commonLabels Labels to add to all deployed objects
 ##
 commonLabels: {}
+        #app.kubernetes.io/name: prometheus
 ## @param commonAnnotations Annotations to add to all deployed objects
 ##
 commonAnnotations: {}
@@ -287,7 +288,7 @@ controller:
   metrics:
     ## @param controller.metrics.enabled Enable Argo CD application controller metrics
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param controller.metrics.service.type Argo CD application controller service type
       ##
@@ -2000,11 +2001,11 @@ server:
     ## Enable metrics for Argo CD server
     ## @param server.metrics.enabled Enable metrics for the Argo CD server
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param server.metrics.service.type Argo CD server service type
       ##
-      type: ClusterIP
+      type: NodePort
       ## @param server.metrics.service.port Argo CD server metrics service port
       ##
       port: 8083
@@ -2013,7 +2014,7 @@ server:
       ## @param server.metrics.service.nodePort Node port for Argo CD server metrics service
       ## NOTE: choose port between <30000-32767>
       ##
-      nodePort: "30680"
+      nodePort: ""
 
       ## @param server.metrics.service.clusterIP Argo CD server metrics service Cluster IP
       ## e.g.:
@@ -2619,11 +2620,11 @@ repoServer:
     ## Enable metrics for Argo CD repo server
     ## @param repoServer.metrics.enabled Enable metrics for the Argo CD repo server
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param repoServer.metrics.service.type Argo CD repo server service type
       ##
-      type: ClusterIP
+      type: NodePort
       ## @param repoServer.metrics.service.port Argo CD repo server metrics service port
       ##
       port: 8084
@@ -3027,7 +3028,7 @@ dex:
   service:
     ## @param dex.service.type Dex service type
     ##
-    type: ClusterIP
+    type: NodePort
     ## @param dex.service.ports.http Dex HTTP service port
     ## @param dex.service.ports.grpc Dex grpc service port
     ##
@@ -3101,7 +3102,7 @@ dex:
     service:
       ## @param dex.metrics.service.type Dex service type
       ##
-      type: ClusterIP
+      type: NodePort
       ## @param dex.metrics.service.port Dex metrics service port
       ##
       port: 5558

@@ -747,11 +747,9 @@ serverFiles:
         static_configs:
           - targets: 
                - localhost:9090
-
-      - job_name: argocd
-        static_configs:
-          - labels: 
-               job: prometheus
+               - argo-cd-server-metrics:8083
+               - argo-cd-app-controller-metrics:8082
+               - argo-cd-repo-server-metrics:8084
 
       # A scrape configuration for running Prometheus on a Kubernetes cluster.
       # This uses separate scrape configs for cluster components (i.e. API server, node)

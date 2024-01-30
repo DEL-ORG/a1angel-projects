@@ -32,7 +32,8 @@ nameOverride: ""
 fullnameOverride: ""
 ## @param commonLabels Labels to add to all deployed objects
 ##
-commonLabels: {}
+commonLabels: 
+     team: a1angel
     
 ## @param commonAnnotations Annotations to add to all deployed objects
 ##
@@ -350,7 +351,7 @@ controller:
       namespace: ""
       ## @param controller.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: ""
+      jobLabel: "team"
       ## @param controller.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##
@@ -625,7 +626,7 @@ applicationSet:
   metrics:
     ## @param applicationSet.metrics.enabled Enable Argo CD applicationSet controller metrics
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param applicationSet.metrics.service.type Argo CD applicationSet controller service type
       ##
@@ -677,7 +678,7 @@ applicationSet:
     serviceMonitor:
       ## @param applicationSet.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param applicationSet.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring
@@ -685,7 +686,7 @@ applicationSet:
       namespace: ""
       ## @param applicationSet.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: ""
+      jobLabel: "team"
       ## @param applicationSet.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##
@@ -1029,7 +1030,7 @@ notifications:
   metrics:
     ## @param notifications.metrics.enabled Enable Argo CD notifications controller metrics
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param notifications.metrics.service.type Argo CD notifications controller service type
       ##
@@ -1081,7 +1082,7 @@ notifications:
     serviceMonitor:
       ## @param notifications.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param notifications.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring
@@ -1089,7 +1090,7 @@ notifications:
       namespace: ""
       ## @param notifications.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: ""
+      jobLabel: "team"
       ## @param notifications.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##
@@ -2063,7 +2064,7 @@ server:
       namespace: ""
       ## @param server.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: ""
+      jobLabel: "team"
       ## @param server.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##
@@ -2682,7 +2683,7 @@ repoServer:
       namespace: ""
       ## @param repoServer.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: ""
+      jobLabel: "team"
       ## @param repoServer.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##
@@ -3098,7 +3099,7 @@ dex:
     ## Enable metrics for Argo Dex
     ## @param dex.metrics.enabled Enable metrics service for Dex
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param dex.metrics.service.type Dex service type
       ##
@@ -3160,7 +3161,7 @@ dex:
       namespace: ""
       ## @param dex.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: ""
+      jobLabel: "team"
       ## @param dex.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##

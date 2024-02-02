@@ -351,7 +351,7 @@ controller:
       namespace: ""
       ## @param controller.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: team
+      jobLabel: ""
       ## @param controller.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##
@@ -686,7 +686,7 @@ applicationSet:
       namespace: ""
       ## @param applicationSet.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: team
+      jobLabel: ""
       ## @param applicationSet.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##
@@ -1090,7 +1090,7 @@ notifications:
       namespace: ""
       ## @param notifications.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: team
+      jobLabel: ""
       ## @param notifications.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##
@@ -2064,7 +2064,7 @@ server:
       namespace: ""
       ## @param server.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: team
+      jobLabel: ""
       ## @param server.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##
@@ -2683,7 +2683,7 @@ repoServer:
       namespace: ""
       ## @param repoServer.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: team
+      jobLabel: ""
       ## @param repoServer.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##
@@ -3161,7 +3161,7 @@ dex:
       namespace: ""
       ## @param dex.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
       ##
-      jobLabel: team
+      jobLabel: ""
       ## @param dex.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
       ##

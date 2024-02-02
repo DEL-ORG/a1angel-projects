@@ -278,7 +278,7 @@ config:
     - '/etc/alertmanager/*.tmpl'
 
   receivers:
-    - name: "slack notification"
+    - name: slack-notification
        slack_configs:
         - channel: '#development-alerts'
           send_resolved: true

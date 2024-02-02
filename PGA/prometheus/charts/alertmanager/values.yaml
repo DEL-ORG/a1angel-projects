@@ -280,7 +280,7 @@ config:
   receivers:
     - name: slack-notification
        slack_configs:
-        - channel: '#development-alerts'
+        - channel: "#development-alerts"
           send_resolved: true
 
   route:

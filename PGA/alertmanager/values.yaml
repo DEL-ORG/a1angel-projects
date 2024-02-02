@@ -271,7 +271,7 @@ configAnnotations: {}
 
 config:
   enabled: true
-  global: 
+  global: {}
      slack_api_url: 'https://hooks.slack.com/services/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'
 
   templates:

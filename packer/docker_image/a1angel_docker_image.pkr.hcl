@@ -34,7 +34,7 @@ build {
     post-processor "docker-push" {
       login          = "true"
       login_username = "devopseasylearning"
-      login_password = "dckr_pat_e_n214_A6_fX1p8q9nNFmsIQkvA"
+      login_password = ""
     }
   }
 }

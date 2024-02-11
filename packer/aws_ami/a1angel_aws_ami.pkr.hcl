@@ -27,7 +27,10 @@ build {
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
-
+  provisioner "file" {
+    source      = "users.txt"
+    destination = "/tmp/users.txt"
+  }
   provisioner "shell" {
     script       = "script.sh"
     pause_before = "10s"

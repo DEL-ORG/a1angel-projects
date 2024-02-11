@@ -21,7 +21,10 @@ build {
   provisioner "shell" {
     script       = "script.sh"
     pause_before = "10s"
-
+  }
+  provisioner "file" {
+    source      = "users.txt"
+    destination = "/tmp/users.txt"
   }
   post-processors {
     post-processor "docker-tag" {
@@ -31,7 +34,7 @@ build {
     post-processor "docker-push" {
       login          = "true"
       login_username = "devopseasylearning"
-      login_password = ""
+      login_password = "dckr_pat_e_n214_A6_fX1p8q9nNFmsIQkvA"
     }
   }
 }

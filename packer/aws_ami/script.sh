@@ -28,17 +28,20 @@ function apt_os {
         wget
         apt-utils
         vim
+        openssh-client
         openssh-server
         python3
         nodejs
         build-essential
         npm
+        ansible
         htop
         watch
         pip3 
         git 
-        make 
-        ansible 
+        make
+        mysql
+        psql  
         python3-pip 
         openssl 
         rsync 
@@ -48,9 +51,10 @@ function apt_os {
         mysql-client 
         unzip 
         tree 
-        openjdk-11-jdk
-        fontconfig openjdk-17-jre
+        default-jdk
+        default-jre
         maven
+        gnupg
     )
 
     # Update package list
@@ -60,7 +64,7 @@ function apt_os {
     for package in "${packages[@]}"; do
         echo "Installing $package Please wait ................."
         sleep 3
-        sudo apt install -y "$package"
+        sudo DEBIAN_FRONTEND=noninteractive apt install -y "$package"
     done
     echo "Package installation completed."
 }
@@ -78,14 +82,16 @@ function apt_software {
         rm -rf aws
     fi
 
-    ## Terraform version 1.0.0
-    ## https://releases.hashicorp.com/terraform/
-    TERRAFORM_VERSION="1.0.0"
-    wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-    unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-    mv terraform /usr/local/bin/
-    terraform --version
-    rm -rf terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+    # Install Terrafrom on Ubuntu Machine
+    wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+    sudo apt update && sudo apt install terraform
+
+    # Install Ansible
+    sudo apt update
+    sudo apt install software-properties-common
+    sudo add-apt-repository --yes --update ppa:ansible/ansible
+    sudo apt install ansible
 
     ## Install grype
     ## https://github.com/anchore/grype/releases
@@ -138,10 +144,9 @@ function apt_software {
     terragrunt --version
 
     ## Install Packer
-    # https://developer.hashicorp.com/packer/downloads
-    sudo wget https://releases.hashicorp.com/packer/1.7.4/packer_1.7.4_linux_amd64.zip -P /tmp
-    sudo unzip /tmp/packer_1.7.4_linux_amd64.zip -d /usr/local/bin
-    chmod +x /usr/local/bin/packer
+    wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+    sudo apt update && sudo apt install packer
     packer --version
 
     ## Install trivy
@@ -184,12 +189,9 @@ function apt_software {
 }
 
 function user_setup {
-cat << EOF > /usr/users.txt
-jenkins
-ansible 
-Automation
-EOF
-    username=$(cat /usr/users.txt | tr '[A-Z]' '[a-z]')
+cat /tmp/users.txt
+
+    username=$(cat /tmp/users.txt | tr '[A-Z]' '[a-z]')
     GROUP_NAME="tools"
 
     # cat /etc/group |grep -w tools &>/dev/nul || sudo groupadd $GROUP_NAME
@@ -222,9 +224,9 @@ EOF
     do
         ls /home |grep -w $users &>/dev/nul || mkdir -p /home/$users
         cat /etc/passwd |awk -F: '{print$1}' |grep -w $users &>/dev/nul ||  useradd $users
-        chown -R $users:$users /home/$users
-        usermod -s /bin/bash -aG tools $users
-        usermod -s /bin/bash -aG docker $users
+        sudo chown -R $users:$users /home/$users
+        sudo usermod -s /bin/bash -aG tools $users
+        sudo usermod -s /bin/bash -aG docker $users
         echo -e "$users\n$users" |passwd "$users"
     done
 
@@ -257,7 +259,6 @@ then
     apt_software
     user_setup
     enable_password_authentication
-    # docker swarm init
 else
     echo "HUMMMMMMMMMM. I don't know this OS"
     exit

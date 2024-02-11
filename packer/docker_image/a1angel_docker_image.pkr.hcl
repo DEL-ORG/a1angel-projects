@@ -8,12 +8,12 @@ packer {
 }
 
 source "docker" "ubuntu" {
-  image  = "ubuntu:20.04"
+  image  = "ubuntu:focal-20240123"
   commit = true
 }
 
 build {
-  name = "ubuntu-20.04-a1angel"
+  name = "ubuntu-focal-20240123-a1angel"
   sources = [
     "source.docker.ubuntu"
   ]

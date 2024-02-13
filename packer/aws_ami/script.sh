@@ -40,7 +40,6 @@ function apt_os {
         pip3 
         git 
         make
-        mysql
         psql  
         python3-pip 
         openssl 
@@ -55,6 +54,7 @@ function apt_os {
         default-jre
         maven
         gnupg
+        software-properties-common
     )
 
     # Update package list

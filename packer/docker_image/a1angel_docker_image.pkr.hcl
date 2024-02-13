@@ -28,7 +28,7 @@ build {
   }
   post-processors {
     post-processor "docker-tag" {
-      repository = "devopseasylearning/a1angel-ubuntu-master-image"
+      repository = "devopseasylearning/a1angel-master-ubuntu-image"
       tags       = ["v1.0.0"]
     }
     post-processor "docker-push" {

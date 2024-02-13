@@ -32,8 +32,9 @@ build {
     destination = "/tmp/users.txt"
   }
   provisioner "shell" {
-    script       = "script.sh"
-    pause_before = "10s"
+    execute_command = "echo 'packer' | sudo -S env {{ .Vars }} {{ .Path }}"
+    script          = "script.sh"
+    pause_before    = "10s"
 
   }
 

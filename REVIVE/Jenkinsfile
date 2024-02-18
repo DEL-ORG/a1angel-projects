@@ -219,7 +219,7 @@ pipeline{
         always {
         success {
             slackSend color: '#2EB67D',
-            channel: 'channel to be provided', 
+            channel: 'development-revive', 
             message: "*Revive Project Build Status*" +
             "\n Project Name: Revive" +
             "\n Job Name: ${env.JOB_NAME}" +
@@ -229,7 +229,7 @@ pipeline{
         }
         failure {
             slackSend color: '#E01E5A',
-            channel: 'channel to be provided',  
+            channel: 'development-revive',  
             message: "*Revive Project Build Status*" +
             "\n Project Name: Revive" +
             "\n Job Name: ${env.JOB_NAME}" +
@@ -239,17 +239,17 @@ pipeline{
             "\n Action : Please check the console output to fix this job IMMEDIATELY" +
             "\n Build url : ${env.BUILD_URL}"
         }
-        unstable {
-            slackSend color: '#ECB22E',
-            channel: 'channel to be provided', 
-            message: "*Revive Project Build Status*" +
-            "\n Project Name: Revive" +
-            "\n Job Name: ${env.JOB_NAME}" +
-            "\n Build number: ${currentBuild.displayName}" +
-            "\n Build Status : *UNSTABLE*" +
-            "\n Action : Please check the console output to fix this job IMMEDIATELY" +
-            "\n Build url : ${env.BUILD_URL}"
-        }   
+        //unstable {
+        //    slackSend color: '#ECB22E',
+        //    channel: 'development-revive', 
+        //    message: "*Revive Project Build Status*" +
+        //    "\n Project Name: Revive" +
+        //    "\n Job Name: ${env.JOB_NAME}" +
+        //    "\n Build number: ${currentBuild.displayName}" +
+        //    "\n Build Status : *UNSTABLE*" +
+        //    "\n Action : Please check the console output to fix this job IMMEDIATELY" +
+        //    "\n Build url : ${env.BUILD_URL}"
+        //}   
     }
     }
 }

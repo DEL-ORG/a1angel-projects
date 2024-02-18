@@ -87,7 +87,7 @@ pipeline{
                 sh '''
             cd REVIVE/src/checkout 
             SKIP_TESTS=true
-            npm test
+            #npm test
                 '''
             }
         

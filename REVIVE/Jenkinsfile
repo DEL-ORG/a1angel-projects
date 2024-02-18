@@ -41,8 +41,7 @@ pipeline{
         steps {
                 sh '''
             cd REVIVE/src/catalog 
-            export SKIP_TESTS=true
-            go test
+            go test -buildscv=false
                 '''
             }        
     }
@@ -86,8 +85,7 @@ pipeline{
         steps {
                 sh '''
             cd REVIVE/src/checkout 
-            SKIP_TESTS=true
-            #npm test
+            npm install
                 '''
             }
         

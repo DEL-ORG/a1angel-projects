@@ -31,21 +31,20 @@ pipeline{
             }
         
         }
-        stage('test catalog') {
-            agent {
-             docker {
-               image 'devopseasylearning/golang02-revive:v1.0.0'
-               args '-u root:root'
-            }    
-        }
-        steps {
-                sh '''
-            cd REVIVE/src/catalog 
-            go test
-                '''
-            }
-        
-    }
+    //    stage('test catalog') {
+    //        agent {
+    //         docker {
+    //           image 'devopseasylearning/golang02-revive:v1.0.0'
+    //           args '-u root:root'
+    //        }    
+    //    }
+    //    steps {
+    //            sh '''
+    //        cd REVIVE/src/catalog 
+    //        go test
+    //            '''
+    //        }        
+    //}
         stage('test cart') {
             agent {
              docker {

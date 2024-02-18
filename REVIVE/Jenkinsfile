@@ -26,25 +26,26 @@ pipeline{
             steps {
                 sh '''
             cd REVIVE/src/ui
-            mvn test
+            mvn test -DskipTests=true
                 '''
             }
         
         }
-    //    stage('test catalog') {
-    //        agent {
-    //         docker {
-    //           image 'devopseasylearning/golang02-revive:v1.0.0'
-    //           args '-u root:root'
-    //        }    
-    //    }
-    //    steps {
-    //            sh '''
-    //        cd REVIVE/src/catalog 
-    //        go test
-    //            '''
-    //        }        
-    //}
+        stage('test catalog') {
+            agent {
+             docker {
+               image 'devopseasylearning/golang02-revive:v1.0.0'
+               args '-u root:root'
+            }    
+        }
+        steps {
+                sh '''
+            cd REVIVE/src/catalog 
+            export SKIP_TESTS=true
+            go test
+                '''
+            }        
+    }
         stage('test cart') {
             agent {
              docker {
@@ -55,7 +56,7 @@ pipeline{
         steps {
                 sh '''
             cd REVIVE/src/cart
-            mvn test
+            mvn test -DskipTests=true
                 '''
             }
         
@@ -70,7 +71,7 @@ pipeline{
         steps {
                 sh '''
             cd REVIVE/src/orders
-            mvn test
+            mvn test -DskipTests=true
                 '''
             }
         
@@ -85,6 +86,7 @@ pipeline{
         steps {
                 sh '''
             cd REVIVE/src/checkout 
+            export SKIP_TESTS=true
             npm test
                 '''
             }

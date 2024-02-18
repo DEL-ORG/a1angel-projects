@@ -86,7 +86,7 @@ pipeline{
         steps {
                 sh '''
             cd REVIVE/src/checkout 
-            export SKIP_TESTS=true
+            SKIP_TESTS=true
             npm test
                 '''
             }

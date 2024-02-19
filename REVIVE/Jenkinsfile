@@ -231,6 +231,13 @@ pipeline{
                 '''
             }
         }
+        stage('Push assets') {
+            steps {
+                sh '''
+                docker push devopseasylearning/a1angel-revive-assets:${BUILD_NUMBER} 
+                '''
+            }
+        }
     }
     post {
         always {

@@ -118,6 +118,7 @@ pipeline{
                 sh '''
                 cd $WORKSPACE/REVIVE/src/ui
                 docker build -t devopseasylearning/a1angel-revive-ui:${BUILD_NUMBER} .
+                docker builder prune
                 '''
             }
         }
@@ -127,6 +128,7 @@ pipeline{
                 cd $WORKSPACE/REVIVE/src/catalog
                 docker build -t devopseasylearning/a1angel-revive-catalog:${BUILD_NUMBER} .
                 docker build -t devopseasylearning/a1angel-revive-catalog-db:${BUILD_NUMBER} -f Dockerfile-db .
+                docker builder prune
                 '''
             }
         }
@@ -136,6 +138,7 @@ pipeline{
                 cd $WORKSPACE/REVIVE/src/cart
                 docker build -t devopseasylearning/a1angel-revive-cart:${BUILD_NUMBER} .
                 docker build -t devopseasylearning/a1angel-revive-cart-db:${BUILD_NUMBER} -f Dockerfile-dynamodb .
+                docker builder prune
                 '''
             }
         }
@@ -146,6 +149,7 @@ pipeline{
                 docker build -t devopseasylearning/a1angel-revive-orders:${BUILD_NUMBER} .
                 docker build -t devopseasylearning/a1angel-revive-orders-db:${BUILD_NUMBER} -f Dockerfile-db .
                 docker build -t devopseasylearning/a1angel-revive-orders-rm-db:${BUILD_NUMBER} -f Dockerfile-rabbitmq .
+                docker builder prune
                 '''
             }
         }
@@ -155,6 +159,7 @@ pipeline{
                 cd $WORKSPACE/REVIVE/src/checkout
                 docker build -t devopseasylearning/a1angel-revive-checkout:${BUILD_NUMBER} .
                 docker build -t devopseasylearning/a1angel-revive-checkout-db:${BUILD_NUMBER} -f Dockerfile-db .
+                docker builder prune
                 '''
             }
         }
@@ -163,6 +168,7 @@ pipeline{
                 sh '''
                 cd $WORKSPACE/REVIVE/src/assets
                 docker build -t devopseasylearning/a1angel-revive-assets:${BUILD_NUMBER} .
+                docker builder prune
                 '''
             }
         }

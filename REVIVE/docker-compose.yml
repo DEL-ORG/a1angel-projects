@@ -25,6 +25,10 @@
         DB_PASSWORD:
         DB_USER: orders_user
         DB_DATABASE: orders
+      expose:
+        - 3306
+      ports:
+        - 3306:3306
       volumes:
         - orders-db:/var/lib/mysql
       networks:   
@@ -87,8 +91,12 @@
         SPRING_DATASOURCE_READER_USERNAME: orders_user
         SPRING_DATASOURCE_READER_PASSWORD: 
         SPRING_RABBITMQ_HOST: rabbitmq
+      expose:
+        - 8000
+      ports:
+        - 8000:8000
       volumes:
-        -
+        - carts-db:/var/lib/mysql
       networks:   
         - revive
       restart: always
@@ -173,5 +181,6 @@
   volumes:
     catalog-db:
     orders-db:
+    carts-db:
     checkout-redis:
     rabbitmq:

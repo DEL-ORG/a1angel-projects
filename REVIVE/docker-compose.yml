@@ -4,7 +4,7 @@
       container_name: rabbitmq
       image: devopseasylearning/a1angel-revive-orders-rm-db:${BUILD_NUMBER}
       environment:
-        RABBITMQ_DEFAULT_USER:
+        RABBITMQ_DEFAULT_USER: rabbitmq_user
         RABBITMQ_DEFAULT_pass: 
       expose:
         - 5672
@@ -34,10 +34,23 @@
       networks:   
         - revive
       restart: always
+      depends_on:
+        - rabbitmq
 
     orders:
       container_name: orders
       image: devopseasylearning/a1angel-revive-orders:${BUILD_NUMBER}
+      environment:
+         DB_HOST: orders-db
+         DB_USER: orders_user
+         DB_PASSWORD:
+         RABBITMQ_HOST: rabbitmq
+         RABBITMQ_DEFAULT_USER: rabbitmq_user
+         RABBITMQ_DEFAULT_pass: 
+      expose: 
+        - 8080
+      ports:
+        - 8080:8080
       networks:   
         - revive
       restart: always
@@ -52,9 +65,6 @@
         - 8080
       ports:
         - 6379:8080
-      environment:
-        REDIS_USER: 
-        REDIS_PASSWORD: 
       volumes:
         - checkout-redis:/data
       networks:   
@@ -135,8 +145,10 @@
       container_name: catalog
       image: devopseasylearning/a1angel-revive-catalog:${BUILD_NUMBER}
       environment:
-        - GIN_MODE=release
-        - DB_PASSWORD=
+         DB_USER: catalog_user
+         DB_HOST: catalog-db
+         GIN_MODE: release
+         DB_PASSWORD:
       networks:   
         - revive
       restart: always

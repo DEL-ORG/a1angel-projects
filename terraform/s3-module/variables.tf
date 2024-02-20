@@ -1,27 +1,34 @@
 variable "region" {
-  type    = string
-  default = "us-east-1"
+  type        = string
+  description = "your desire aws region"
+  default     = "us-east-1"
+}
+
+variable "random_s3" {
+  type = map(bool)
+  default = {
+    "special" = false
+    "upper  " = false
+    "numeric" = false
+  }
 }
 
 variable "tags" {
-  type = any
+  type = map(any)
   default = {
-    "id"             = "2580"
-    "owner"          = "Lady Angel"
-    "teams"          = "a1"
+    "id"             = "1800"
+    "owner"          = "a1angel"
+    "teams"          = "devops"
     "environment"    = "dev"
-    "project"        = "del"
+    "project"        = "S3 Backend"
     "create_by"      = "Terraform"
     "cloud_provider" = "aws"
   }
+
 }
 
-variable "random" {
-  type = any
-  default = {
-    length  = 10
-    special = false
-    upper   = false
-    numeric = true
-  }
+variable "s3_versioning" {
+  type = string
+  default = "Enabled"
+  
 }

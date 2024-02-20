@@ -10,9 +10,12 @@ terraform {
       version = "3.6.0"
     }
   }
+
 }
 
 provider "aws" {
   region = var.region
 }
+provider "random" {
 
+}

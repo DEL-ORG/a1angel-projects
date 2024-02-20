@@ -1,5 +1,7 @@
-resource "aws_s3_bucket" "backend-bucket" {
-  bucket = format("%s-(random_string.bucket_add)-tf-state", var.tags["owner"])
+resource "aws_s3_bucket" "a1angel_s3_backend" {
+  bucket = format("%s-${random_string.a1angel_random_str_s3.result}-statefile", var.tags["id"])
 
-  tags = var.tags
+  tags = merge(var.tags, {
+    Name = a1angel_s3_backend
+  })
 }

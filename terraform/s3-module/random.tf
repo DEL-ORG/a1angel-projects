@@ -1,6 +1,6 @@
-resource "random_string" "bucket_add" {
-  length  = var.random["length"]
-  special = var.random["special"]
-  upper   = var.random["upper"]
-  numeric = var.random["numeric"]
+resource "random_string" "a1angel_random_str_s3" {
+  length  = 5
+  special = var.random_s3["special"]
+  upper   = var.random_s3["upper"]
+  numeric = var.random_s3["numeric"]
 }

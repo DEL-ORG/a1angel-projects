@@ -1,0 +1,177 @@
+  version: '3.0'
+  services:
+    rabbitmq:
+      container_name: rabbitmq
+      image: devopseasylearning/a1angel-revive-orders-rm-db:${BUILD_NUMBER}
+      environment:
+        RABBITMQ_DEFAULT_USER:
+        RABBITMQ_DEFAULT_pass: 
+      expose:
+        - 5672
+        - 15672
+      ports:
+        - 5672:5672
+        - 15672:15672
+      volumes:
+        - rabbitmq:/var/lib/rabbitmq
+      networks:   
+        - revive
+      restart: always
+
+    orders-db:
+      container_name: orders-db
+      image: devopseasylearning/a1angel-revive-orders-db:${BUILD_NUMBER}
+      environment:
+        DB_PASSWORD:
+        DB_USER: orders_user
+        DB_DATABASE: orders
+      volumes:
+        - orders-db:/var/lib/mysql
+      networks:   
+        - revive
+      restart: always
+
+    orders:
+      container_name: orders
+      image: devopseasylearning/a1angel-revive-orders:${BUILD_NUMBER}
+      networks:   
+        - revive
+      restart: always
+      depends_on:
+        - rabbitmq
+        - orders-db
+    
+    checkout-redis:
+      container_name: checkout-redis
+      image: devopseasylearning/a1angel-revive-checkout-db:${BUILD_NUMBER}
+      expose:
+        - 8080
+      ports:
+        - 6379:8080
+      environment:
+        REDIS_USER: 
+        REDIS_PASSWORD: 
+      volumes:
+        - checkout-redis:/data
+      networks:   
+        - revive
+      restart: always
+
+    checkout:
+      container_name: checkout
+      image: devopseasylearning/a1angel-revive-checkout:${BUILD_NUMBER}
+      environment:
+        REDIS_URL: redis://checkout-redis:6379
+        ENDPOINTS_ORDERS: http://orders:8080
+      read_only: true
+      tmpfs:
+      - /tmp:rw,noexec,nosuid
+      networks:   
+        - revive
+      restart: always
+      depends_on:
+        - orders
+        - checkout-redis
+
+    carts-db:
+      container_name: carts-db
+      image: devopseasylearning/a1angel-revive-cart-db:${BUILD_NUMBER}
+      environment:
+        JAVA_OPTS: -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/urandom
+        SERVER_TOMCAT_ACCESSLOG_ENABLED: true
+        SPRING_PROFILES_ACTIVE: mysql,rabbitmq
+        SPRING_DATASOURCE_WRITER_URL: jdbc:mariadb://orders-db:3306/orders
+        SPRING_DATASOURCE_WRITER_USERNAME: orders_user
+        SPRING_DATASOURCE_WRITER_PASSWORD:
+        SPRING_DATASOURCE_READER_URL: jdbc:mariadb://orders-db:3306/orders
+        SPRING_DATASOURCE_READER_USERNAME: orders_user
+        SPRING_DATASOURCE_READER_PASSWORD: 
+        SPRING_RABBITMQ_HOST: rabbitmq
+      volumes:
+        -
+      networks:   
+        - revive
+      restart: always
+
+    carts:
+      container_name: carts
+      image: devopseasylearning/a1angel-revive-cart:${BUILD_NUMBER}
+      environment:
+        JAVA_OPTS: -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/urandom
+        SERVER_TOMCAT_ACCESSLOG_ENABLED: true
+        SPRING_PROFILES_ACTIVE: dynamodb
+        CARTS_DYNAMODB_ENDPOINT: http://carts-db:8000
+        CARTS_DYNAMODB_CREATETABLE: true
+        AWS_ACCESS_KEY_ID: key
+        AWS_SECRET_ACCESS_KEY: dummy
+      networks:   
+        - revive
+      restart: always
+      depends_on:
+        - carts-db
+
+    catalog-db:
+      container_name: catalog-db
+      image: devopseasylearning/a1angel-revive-catalog_db:${BUILD_NUMBER}
+      environment:
+        DB_PASSWORD:
+        DB_USER: catalog_user
+        DB_DATABASE: sampledb
+      volumes:
+        - catalog-db:/var/lib/mysql
+      networks:   
+        - revive
+      restart: always
+
+    catalog:
+      container_name: catalog
+      image: devopseasylearning/a1angel-revive-catalog:${BUILD_NUMBER}
+      environment:
+        - GIN_MODE=release
+        - DB_PASSWORD=
+      networks:   
+        - revive
+      restart: always
+      depends_on:
+        - catalog-db
+
+    assets:
+      container_name: assets
+      image: devopseasylearning/a1angel-revive-assets:${BUILD_NUMBER}
+      networks:   
+        - revive
+      restart: always
+
+    ui:
+      container_name: ui
+      image: devopseasylearning/a1angel-revive-ui:${BUILD_NUMBER}
+      environment:
+         JAVA_OPTS: -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/urandom
+         SERVER_TOMCAT_ACCESSLOG_ENABLED: true
+         ENDPOINTS_CATALOG: http://catalog:8080
+         ENDPOINTS_CARTS: http://carts:8080
+         ENDPOINTS_ORDERS: http://orders:8080
+         ENDPOINTS_CHECKOUT: http://checkout:8080
+         ENDPOINTS_ASSETS: http://assets:8080
+      expose:
+        - 8080
+      ports:
+        -  8888:8080     
+      networks:   
+        - revive
+      restart: always
+      depends_on:
+        - catalog
+        - carts
+        - orders
+        - checkout
+        - assets
+  
+  networks:
+    revive:
+  
+  volumes:
+    catalog-db:
+    orders-db:
+    checkout-redis:
+    rabbitmq:

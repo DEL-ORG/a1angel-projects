@@ -37,7 +37,7 @@ availability_zone = [
 }
 
 module "vpc" {
-  source = "../vpc-module/"
+  source = "../../vpc-module/"
   region = local.region
   tags = local.tags
   cidr = local.cidr

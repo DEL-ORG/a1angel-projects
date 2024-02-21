@@ -30,3 +30,13 @@ variable "availability_zone" {
     "us-east-1c",
   ]
 }
+
+variable "backend" {
+  type = map(string)
+  default = {
+    bucket         = ""
+    dynamodb_table = ""
+    key            = ""
+    region         = ""
+  }
+}

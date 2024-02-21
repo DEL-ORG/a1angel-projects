@@ -34,7 +34,7 @@ s3_versioning = "Enabled"
 }
 
 module "vpc" {
-  source = "../../s3-module"
+  source = "../../modules/s3-module"
   region = local.region
   random_s3 = local.random_s3 
   s3_versioning = local.s3_versioning

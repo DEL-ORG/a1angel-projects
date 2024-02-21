@@ -16,4 +16,12 @@ availability_zone = [
     "us-east-1b",
     "us-east-1c",
 ]
+
+backend = {
+    bucket         = ""
+    dynamodb_table = ""
+    key            = ""
+    region         = ""
+}
+
     

@@ -5,7 +5,7 @@ resource "aws_subnet" "a1angel_private_subnet" {
   availability_zone = element(var.availability_zone, count.index)
 
   tags = merge(var.tags, {
-    Name = format("%s-a1angel_private_subnet-${count.index}", var.tags["id"])
+    Name = format("%s-a1angel_private_subnet-${count.index}", var.tags["environment"])
     }
   )
 }
@@ -15,7 +15,7 @@ resource "aws_subnet" "a1angel_public_subnet" {
   cidr_block = cidrsubnet(var.cidr, 6, count.index + 1)
 
   tags = merge(var.tags, {
-    Name = format("%s-a1angel_public_subnet-${count.index}", var.tags["id"])
+    Name = format("%s-a1angel_public_subnet-${count.index}", var.tags["environment"])
     }
   )
 }

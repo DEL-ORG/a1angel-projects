@@ -6,6 +6,7 @@ resource "aws_subnet" "a1angel_private_subnet" {
 
   tags = merge(var.tags, {
     Name = format("%s-a1angel_private_subnet-${count.index}", var.tags["environment"])
+    "kubernetes.io/role/internal-elb" = 1
     }
   )
 }
@@ -16,6 +17,7 @@ resource "aws_subnet" "a1angel_public_subnet" {
 
   tags = merge(var.tags, {
     Name = format("%s-a1angel_public_subnet-${count.index}", var.tags["environment"])
+    "kubernetes.io/role/elb" = 1
     }
   )
 }

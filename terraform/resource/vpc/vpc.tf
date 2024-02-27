@@ -34,6 +34,8 @@ availability_zone = [
     "us-east-1c",
 ]
 
+num_nat_gw = 1
+
 }
 
 module "vpc" {
@@ -42,4 +44,5 @@ module "vpc" {
   tags = local.tags
   cidr = local.cidr
   availability_zone = local.availability_zone
+  num_nat_gw = local.num_nat_gw
 }

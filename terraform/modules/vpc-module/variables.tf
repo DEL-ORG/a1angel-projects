@@ -31,12 +31,9 @@ variable "availability_zone" {
   ]
 }
 
-variable "backend" {
-  type = map(string)
-  default = {
-    bucket         = ""
-    dynamodb_table = ""
-    key            = ""
-    region         = ""
-  }
+
+variable "num_nat_gw" {
+  type = number
+  default = 1
+  
 }

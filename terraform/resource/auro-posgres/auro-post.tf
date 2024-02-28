@@ -18,6 +18,7 @@ locals {
   publicly_accessible = false
   sg_port = 5432
   instance_class = "db.r6g.large"
+  deletion_window = 10
 
   cluster = {
     "cluster_identifier"      = "aurora-cluster-demo"
@@ -25,6 +26,13 @@ locals {
     "engine_version"          = "11.9"
     "backup_retention_period" = 5
     "preferred_backup_window" = "07:00-09:00"
+    "database_name "                  = "a1angel_tb"
+    "master_username"                 = "a1angel"
+    "manage_master_user_password"     = true
+    "deletion_protection"             = false
+    "apply_immediately"               = true
+    "storage_encrypted "              = true
+    "skip_final_snapshot" = true
   }
 
 }
@@ -41,4 +49,5 @@ module "auro-postgres" {
     publicly_accessible = local.publicly_accessible
     instance_class = local.instance_class
     cluster = local.cluster
+    deletion_window = local.deletion_window
 }

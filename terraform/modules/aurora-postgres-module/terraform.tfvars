@@ -20,8 +20,15 @@ cluster = {
   "engine_version"          = "11.9"
   "backup_retention_period" = 5
   "preferred_backup_window" = "07:00-09:00"
+  "database_name "                  = "a1angel_tb"
+  "master_username"                 = "a1angel"
+  "manage_master_user_password"     = true
+  "deletion_protection"             = false
+  "apply_immediately"               = true
+  "storage_encrypted "              = true
+  "skip_final_snapshot" = true
 }
-
+deletion_window = 10
 inst_count          = 2
 publicly_accessible = false
 

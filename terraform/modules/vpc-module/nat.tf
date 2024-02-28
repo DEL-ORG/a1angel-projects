@@ -1,5 +1,5 @@
 resource "aws_nat_gateway" "a1angel_nat_gateway" {
-  count         = var.tags["environment"] == "production" ? length(var.availability_zone) : var.num_nat_gw
+  count         = var.tags["environment"] == "production" || var.tags["environment"] == "pre-production" ? length(var.availability_zone) : var.num_nat_gw
   allocation_id = element(aws_eip.a1angel_eip.*.id, count.index)
   subnet_id     = element(aws_subnet.a1angel_public_subnet.*.id, count.index)
 

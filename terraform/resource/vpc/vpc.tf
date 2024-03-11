@@ -39,7 +39,8 @@ num_nat_gw = 1
 }
 
 module "vpc" {
-  source = "../../modules/vpc-module/"
+  source = "git@github.com:DEL-ORG/a1angel-projects.git//terraform/modules/vpc-module?ref=main"
+  //source = "../../modules/vpc-module/"
   region = local.region
   tags = local.tags
   cidr = local.cidr

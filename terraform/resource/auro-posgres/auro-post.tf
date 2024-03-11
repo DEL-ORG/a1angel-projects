@@ -38,7 +38,8 @@ locals {
 }
 
 module "auro-postgres" {
-    source = "../../modules/aurora-postgres-module"
+    source = "git@github.com:DEL-ORG/a1angel-projects.git//terraform/modules/aurora-postgres-module?ref=main"
+    //source = "../../modules/aurora-postgres-module"
     aws_region = local.aws_region
     tags = local.tags
     vpc_id = local.vpc_id

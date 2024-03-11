@@ -40,7 +40,8 @@ locals {
 }
 
 module "ec2" {
-    source = "../../modules/ec2-module"
+    source = "git@github.com:DEL-ORG/a1angel-projects.git//terraform/modules/ec2-module?ref=main"
+    //source = "../../modules/ec2-module"
     region = local.region
     tags = local.tags
     backend = local.backend

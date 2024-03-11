@@ -34,7 +34,8 @@ s3_versioning = "Enabled"
 }
 
 module "vpc" {
-  source = "../../modules/s3-module"
+  //source = "../../modules/s3-module"
+  source = "git@github.com:DEL-ORG/a1angel-projects.git//modules/s3-module"
   region = local.region
   random_s3 = local.random_s3 
   s3_versioning = local.s3_versioning

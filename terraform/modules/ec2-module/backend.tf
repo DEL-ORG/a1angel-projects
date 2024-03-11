@@ -1,8 +1,8 @@
 terraform {
-  backend "a1angel_backend" {
-    bucket         = var.backend["bucket"]
-    dynamodb_table = var.backend["dynamodb_table"]
-    key            = var.backend["key"]
-    region         = var.backend["region"]
+  backend "s3" {
+    bucket = "terraform-angel"
+    #dynamodb_table = var.backend["dynamodb_table"]
+    key    = "DevOps/ec2/terraform.tfstate"
+    region = "us-east-1"
   }
 }

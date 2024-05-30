@@ -1,0 +1,23 @@
+---
+    users:
+      - name: jsmith
+        home: "/home/jsmith"
+        comment: John Smith
+        uid: 1040
+        shell: /bin/bash
+        groups: ['admin', 'users']
+        sudoers_content: "john ALL=(ALL) NOPASSWD:ALL"
+      - name: bjones
+        comment: barbara jones
+        uid: 1060
+        shell: /bin/sh
+        groups: ['users']
+      - name: sangelina
+        groups: ['']
+    delete_users:
+      - bjones
+    disable_users:
+      - jsmith
+    change_shells:
+      - name: a1angel
+        shell: /bin/zsh

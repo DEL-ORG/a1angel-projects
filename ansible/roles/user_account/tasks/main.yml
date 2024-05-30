@@ -1,0 +1,50 @@
+---
+- name: Check if users exist
+  user:
+     name: "{{ item }}"
+  check_mode: true
+  register: users_check
+  debug:
+    msg: "{{item}} does not exist"
+  loop: "{{ users | map(attribute='name') | list }}"
+- name: Create new users
+  user:
+    home: "{{ item.home | default(omit) }}"
+    comment: "{{ item.comment | default(omit) }}"
+    uid: "{{ item.uid | default(omit) }}"
+    name: "{{ item.name }}"
+    state: present
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    groups: "{{ item.groups | join(',') }}"
+    password: "{{ item.password | default(omit) }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+  loop: "{{ users }}"
+  when: item.name not in users_check.results
+
+- name: Manage sudoers file entries
+  copy:
+    dest: "/etc/sudoers.d/{{ item.name }}"
+    content: "{{ item.sudoers_content }}"
+    mode: '0440'
+  loop: "{{ users }}"
+  when: item.sudoers_content is defined
+
+- name: Delete users
+  user:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ delete_users }}"
+
+- name: Disable users
+  user:
+    name: "{{ item }}"
+    shell: "/sbin/nologin"
+  loop: "{{ disable_users }}"
+
+- name: Change user shells
+  user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell }}"
+  loop: "{{ change_shells }}"

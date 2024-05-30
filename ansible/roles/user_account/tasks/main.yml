@@ -49,6 +49,7 @@
 - name: Delete users
   user:
     name: "{{ item }}"
+    home: "{{ item.home }}"
     state: absent
   loop: "{{ delete_users }}"
 

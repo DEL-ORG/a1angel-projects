@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: create_users
+  role_name: users_management
   author: Ryan Daniels
   description: Role to manage users on linux
   license: MIT

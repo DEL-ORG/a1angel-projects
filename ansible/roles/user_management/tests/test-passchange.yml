@@ -7,8 +7,6 @@
 
     users:
       - username: testuser101
-        password: $6$/y5RGZnFaD3f$96xVdOAnldEtS__NEW_SHOULD_NOT_CHANGE__bFymeKH/1Rxd3k.RQfpgebM6amLK3xAaycybdc.60
-        update_password: on_create
         comment: Test User 100
         shell: /bin/bash
         ssh_key: |
@@ -23,8 +21,6 @@
           - monitoring
 
       - username: testuser102
-        password: $6$F/KXFzMa$ZIDqtYtM6sOC3UmRnt__NEW_SHOULD_CHANGE__6jxskXpve8l6DYsQyI1FT8N5I5cL0YkzW7bLbSCMtUw1
-        update_password: always
         comment: Test User 101
         groups: testnew102
         shell: /bin/sh
@@ -36,7 +32,6 @@
           - monitoring
 
       - username: testuser103
-        update_password: always
         use_sudo: no
         user_state: present
         servers:
@@ -56,7 +51,6 @@
 
       - username: testuser105
         uid: 1099
-        password: $6$XEnyI5UYSw$Rlc6tXtECtqdJ3uFitrbBlec1/8Fx2obfgFST419ntJqaX8sfPQ9xR7vj7dGhQsfX8zcSX3tumzR7/vwlIH6p/
         primarygroup: group105primary
         ssh_key: ssh-rsa AAAB.... test107@server
         use_sudo: no

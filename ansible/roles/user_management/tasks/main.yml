@@ -58,7 +58,7 @@
   debug:
     msg: "{{ existing_users }} already exist"
   loop: '{{ users }}'
-  
+
 - name: create users
   user:
     name: "{{ item.username }}"
@@ -160,12 +160,12 @@
   user:
     name: "{{ item.username }}"
     expires: 0 
-#  command: chage -E 0 {{ item.username }} #Alternative lock password & ssh key authentication
-#  register: user_results
+  register: user_results
   when: item.user_state == 'lock' and item.servers | intersect(create_users_group_names)
   loop: '{{ users }}'
   loop_control:
     label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
+
 - name: Unlock password login 
   user:
     name: "{{ item.username }}"

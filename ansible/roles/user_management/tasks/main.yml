@@ -163,8 +163,8 @@
   register: user_results
   when: item.user_state == 'lock' and item.servers | intersect(create_users_group_names)
   loop: '{{ users }}'
-  loop_control:
-    label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
+  #loop_control:
+   # label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
 
 - name: Unlock password login 
   user:

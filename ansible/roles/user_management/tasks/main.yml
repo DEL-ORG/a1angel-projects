@@ -144,15 +144,7 @@
   loop_control:
     label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
 
-- name: Unlock password login 
-  user:
-    name: "{{ item.username }}"
-    expires: -1 
-  register: user_results
-  when: item.user_state == 'present' and item.servers | intersect(create_users_group_names)
-  loop: '{{ users }}'
-  loop_control:
-    label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
+########    label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
 
 #- name: Lock password & ssh key authentication
 #  chage:

@@ -53,9 +53,12 @@
   loop: '{{ users }}'
   loop_control:
     label: "username: {{ item.username }}, user_state: {{ item.user_state }}, primarygroup: {{ item.primarygroup if item.primarygroup is defined else ''}}, groups: {{ item.groups if item.groups is defined else ''}}, servers: {{ item.servers if item.servers is defined else '' }}, group_names: {{ create_users_group_names }}" # noqa 204
+
+- name: existing users
   debug:
     msg: "{{ existing_users }} already exist"
-
+  loop: '{{ users }}'
+  
 - name: create users
   user:
     name: "{{ item.username }}"

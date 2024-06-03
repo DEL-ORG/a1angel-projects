@@ -200,10 +200,10 @@
 
 
 #Not needed, sp_expire -1 locks password authentication as well.
-#- name: Lock users | Lock password login
-#  command: passwd -l {{ item.username }} #lock password authentication
-#  when: item.user_state == 'lock'
-#  with_items: "{{ users }}"
+- name: Lock users | Lock password login
+  command: passwd -l {{ item.username }} #lock password authentication
+  when: item.user_state == 'lock'
+  with_items: "{{ users }}"
 
 
 

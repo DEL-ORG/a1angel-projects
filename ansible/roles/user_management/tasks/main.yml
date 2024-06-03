@@ -156,15 +156,15 @@
 #    label: "username: {{item.username}}, user_state: {{ item.user_state }}"
 #
 
-#- name: Lock users | Lock password & ssh key authentication
-#  user:
-#    name: "{{ item.username }}"
-#    expires: 0 
-#  register: user_results
-#  when: item.user_state == 'lock' and item.servers | intersect(create_users_group_names)
-#  loop: '{{ users }}'
-#  loop_control:
-#    label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
+- name: Lock users | Lock password & ssh key authentication
+  user:
+    name: "{{ item.username }}"
+    expires: 0 
+  register: user_results
+  when: item.user_state == 'lock' and item.servers | intersect(create_users_group_names)
+  loop: '{{ users }}'
+  loop_control:
+    label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
 
 - name: Unlock password login 
   user:
@@ -176,7 +176,7 @@
   loop_control:
     label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
 
-- debug: var=user_results
+#- debug: var=user_results
 
 
 

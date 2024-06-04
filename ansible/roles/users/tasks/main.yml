@@ -48,8 +48,8 @@
   user:
     name: "{{ item.name }}"
     shell: "/sbin/nologin"
-  loop: "{{ disable_users | map(attribute='name') | list }}" #"{{ disable_users }}"
-
+  loop: "{{ disable_users }}"
+ #"{{ disable_users | map(attribute='name') | list }}" 
 - name: Delete users
   user:
     name: "{{ item.name }}"

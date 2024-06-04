@@ -22,9 +22,9 @@
         groups: ['']
  disable_users:
       - name: afranklin
-        shell: /sbin/nologin
+       # shell: /sbin/nologin
       - name: bjones
-        shell: /sbin/nologin
+        #shell: /sbin/nologin
  delete_users:    
       - name: tinnocent
         home: /home/tinnocent

@@ -14,6 +14,7 @@
         uid: 1060
         shell: /bin/sh
         groups: ['users']
+        ssh_key: yes
       - name: tinnocent
         comment: Twizere Innocent
         shell: /sbin/nologin

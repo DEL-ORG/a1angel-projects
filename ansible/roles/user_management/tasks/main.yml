@@ -53,7 +53,15 @@
   loop: '{{ users }}'
   loop_control:
     label: "username: {{ item.username }}, user_state: {{ item.user_state }}, primarygroup: {{ item.primarygroup if item.primarygroup is defined else ''}}, groups: {{ item.groups if item.groups is defined else ''}}, servers: {{ item.servers if item.servers is defined else '' }}, group_names: {{ create_users_group_names }}" # noqa 204
+<<<<<<< HEAD
     #  debug: existing_users 
+=======
+
+- name: existing users
+  debug:
+    msg: "{{ existing_users }} already exist"
+  loop: '{{ users }}'
+>>>>>>> 0a679021047ce725686467efd78fa4b0f162f57a
 
 - name: create users
   user:
@@ -130,6 +138,7 @@
   loop_control:
     label: "username: {{ item.username }}, use_sudo: {{ item.use_sudo|d(false) }}"
 
+<<<<<<< HEAD
 
     #- name: Lock password & ssh key authentication
     #chage:
@@ -173,12 +182,70 @@
   loop: '{{ users }}'
   loop_control:
     label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
+=======
+- name: Lock users | Lock password & ssh key authentication
+  user:
+    name: "{{ item.username }}"
+    expires: 0 
+  register: user_results
+  when: item.user_state == 'lock' and item.servers | intersect(create_users_group_names)
+  loop: '{{ users }}'
+  loop_control:
+    label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
+
+########    label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
+
+#- name: Lock password & ssh key authentication
+#  chage:
+#    user: "{{ item.username }}"
+#    sp_expire: 0
+##  command: chage -E 0 {{ item.username }} #Alternative lock password & ssh key authentication
+#  when: item.user_state == 'lock' and item.servers | intersect(create_users_group_names)
+#  loop: '{{ users }}'
+#  loop_control:
+#    label: "username: {{item.username}}, user_state: {{ item.user_state }}"
+
+#- name: Unlock password login 
+#  chage:
+#    user: "{{ item.username }}"
+#    sp_expire: -1
+##  command: chage -E -1 {{ item.username }} #unlock password authentication
+#  when: item.user_state == 'present' and item.servers | intersect(create_users_group_names)
+#  loop: '{{ users }}'
+#  loop_control:
+#    label: "username: {{item.username}}, user_state: {{ item.user_state }}"
+#
+
+#- name: Lock users | Lock password & ssh key authentication
+#  user:
+#    name: "{{ item.username }}"
+#    expires: 0 
+#  register: user_results
+#  when: item.user_state == 'lock' and item.servers | intersect(create_users_group_names)
+#  loop: '{{ users }}'
+#  loop_control:
+#    label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
+#
+#- name: Unlock password login 
+#  user:
+#    name: "{{ item.username }}"
+#    expires: -1 
+#  register: user_results
+#  when: item.user_state == 'present' and item.servers | intersect(create_users_group_names)
+#  loop: '{{ users }}'
+#  loop_control:
+#    label: "username: {{ item.username }}, user_state: {{ item.user_state }}"
+#
+#- debug: var=user_results
+
+
+>>>>>>> 0a679021047ce725686467efd78fa4b0f162f57a
 
 #Not needed, sp_expire -1 locks password authentication as well.
-#- name: Lock users | Lock password login
-#  command: passwd -l {{ item.username }} #lock password authentication
-#  when: item.user_state == 'lock'
-#  with_items: "{{ users }}"
+- name: Lock users | Lock password login
+  command: passwd -l {{ item.username }} #lock password authentication
+  when: item.user_state == 'lock'
+  with_items: "{{ users }}"
 
 
 

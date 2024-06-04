@@ -8,7 +8,7 @@
         shell: /bin/bash
         groups: ['admin', 'users']
         sudoers_content: "afranklin ALL=(ALL) NOPASSWD:ALL"
-        ssh_key: ".ssh/id_rsa.pub"
+        ssh_key: "/home/afranklin/.ssh/id_rsa.pub"
       - name: bjones
         comment: Brendy Jones
         uid: 1060

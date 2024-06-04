@@ -14,10 +14,10 @@
     uid: "{{ '10409' | random }}"
     state: present
     shell: "{{ item.shell | default('/bin/bash') }}"
-    generate_ssh_key: yes
-    ssh_key_bits: 2048
-    ssh_key_file: .ssh/id_rsa #"{{ item.home/.ssh/id_rsa }}" #
-    force: yes
+    #generate_ssh_key: yes
+    #ssh_key_bits: 2048
+    #ssh_key_file: .ssh/id_rsa #"{{ item.home/.ssh/id_rsa }}" #
+    #force: yes
   loop: "{{ users }}"
   when: item.name not in users_check.results | selectattr('failed', 'equalto', False) | map(attribute='item') | list     
 
@@ -28,6 +28,13 @@
     append: yes
   loop: "{{ users }}"
   when: item.groups is defined
+
+- name: Generate SSH key pair for afranklin
+  openssh_keypair:
+    path: "{{ item.home/.ssh/id_rsa }}" #/home/afranklin/.ssh/id_rsa
+    type: rsa
+    size: 2048
+
 
 - name: Add SSH keys
   authorized_key:

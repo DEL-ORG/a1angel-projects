@@ -40,7 +40,7 @@
 
 - name: Generate SSH key pair for afranklin
   openssh_keypair:
-    path: "home/{{ item.name }}/.ssh/id_rsa" #/home/afranklin/.ssh/id_rsa
+    path: "/home/{{ item.name }}/.ssh/id_rsa" #/home/afranklin/.ssh/id_rsa
     type: rsa
     size: 2048
   loop: "{{ users }}"

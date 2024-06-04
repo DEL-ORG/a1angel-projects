@@ -35,4 +35,4 @@
         home: /home/evincent
  change_shells:
       - name: bjones
-        shell: /bin/zsh
+        shell: /bin/bash

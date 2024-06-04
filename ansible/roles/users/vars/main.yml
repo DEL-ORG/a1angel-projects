@@ -1,13 +1,14 @@
 ---
  users:
       - name: afranklin
-        home: "/home/jsmith"
+        home: "/home/afranklin"
+        create_home: yes
         comment: Agbanyo Franklin
         uid: 1040
         shell: /bin/bash
         groups: ['admin', 'users']
-        sudoers_content: "john ALL=(ALL) NOPASSWD:ALL"
-        ssh_key: "/home/jsmith/.ssh/id_rsa.pub"
+        sudoers_content: "afranklin ALL=(ALL) NOPASSWD:ALL"
+        ssh_key: "/home/afranklin/.ssh/id_rsa.pub"
       - name: bjones
         comment: Brendy Jones
         uid: 1060
@@ -18,7 +19,10 @@
         shell: /sbin/nologin
       - name: evincent
         comment: Eric Vincent
+        home: /home/evincent
+        create_home: yes
         uid: 1050
+        ssh_key: "/home/evincent/.ssh/id_rsa.pub"
         groups: ['']
  disable_users:
       - name: afranklin

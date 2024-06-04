@@ -51,9 +51,9 @@
   authorized_key:
     user: "{{ item.name }}"
     state: present
-    key: "/home/{{ item.name }}/.ssh/id_rsa.pub"
+    #key: "/home/{{ item.name }}/.ssh/id_rsa.pub"
     #key:  "{{ lookup('file', '/home/' + {{ item.name }} + '/.ssh/id_rsa.pub') }}"
-    #"{{ lookup('file', item.ssh_key) }}"
+    key: "{{ lookup('file', '/home/{{ item.name }}/.ssh/id_rsa.pub' }}"
   loop: "{{ users }}"
   when: item.ssh_key is defined
 

@@ -16,7 +16,8 @@
     shell: "{{ item.shell | default('/bin/bash') }}"
     generate_ssh_key: yes
     ssh_key_bits: 2048
-    ssh_key_file: "{{ item.home/.ssh/id_rsa }}" #.ssh/id_rsa
+    ssh_key_file: .ssh/id_rsa #"{{ item.home/.ssh/id_rsa }}" #
+    force: yes
   loop: "{{ users }}"
   when: item.name not in users_check.results | selectattr('failed', 'equalto', False) | map(attribute='item') | list     
 

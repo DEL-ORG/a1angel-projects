@@ -1,2 +1,64 @@
 ---
-# tasks file for users
+- name: Check if users exist
+  ansible.builtin.user:
+    name: "{{ item }}"
+  check_mode: true
+  register: users_check
+  loop: "{{ users | map(attribute='name') | list }}"
+
+- name: Create new users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    create_home: true
+    comment: "{{ item.comment | default(omit) }}"
+    uid: "{{ '10409' | random }}"
+    state: present
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+  loop: "{{ users }}"
+  when: item.name not in users_check.results | selectattr('failed', 'equalto', False) | map(attribute='item') | list     
+
+- name: Add users to groups
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    groups: "{{ item.groups | join(',') }}"
+    append: yes
+  loop: "{{ users }}"
+  when: item.groups is defined
+
+- name: Add SSH keys
+  ansible.builtin.authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ item.ssh_key }}"
+  loop: "{{ users }}"
+  when: item.ssh_key is defined
+
+- name: Manage sudoers file entries
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/{{ item.name }}"
+    content: "{{ item.sudoers_content }}"
+    mode: '0440'
+  loop: "{{ users }}"
+  when: item.sudoers_content is defined
+
+- name: Delete users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    home: "{{ item.home }}"
+    state: absent
+  loop: "{{ delete_users }}"
+
+- name: Disable users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    shell: "/sbin/nologin"
+  loop: "{{ disable_users }}"
+
+- name: Change user shells
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell }}"
+  loop: "{{ change_shells }}"

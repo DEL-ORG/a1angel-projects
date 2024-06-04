@@ -1,4 +1,5 @@
 ---
+default_shell: "/bin/bash"
 users: 
 delete_users: 
 disable_users:

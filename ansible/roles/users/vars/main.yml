@@ -22,14 +22,12 @@
         groups: ['']
  disable_users:
       - name: afranklin
-       # shell: /sbin/nologin
       - name: bjones
-        #shell: /sbin/nologin
  delete_users:    
       - name: tinnocent
         home: /home/tinnocent
       - name: evincent
         home: /home/evincent
  change_shells:
-        name: bjones
+      - name: bjones
         shell: /bin/zsh

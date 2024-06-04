@@ -17,8 +17,10 @@
         groups: ['']
  delete_users:
         - bjones
- disable_users:
         - jsmith
- change_shells:
-          name: a1angel
-          shell: /bin/zsh
+        - sangelina
+ #disable_users:
+ #       - jsmith
+ #change_shells:
+ #         name: a1angel
+ #         shell: /bin/zsh

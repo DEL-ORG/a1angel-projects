@@ -28,13 +28,13 @@
   loop: "{{ users }}"
   when: item.groups is defined
 
-- name: Add SSH keys
-  ansible.builtin.authorized_key:
-    user: "{{ item.name }}"
-    state: present
-    key: "{{ item.ssh_key }}"
-  loop: "{{ users }}"
-  when: item.ssh_key is defined
+#- name: Add SSH keys
+#  ansible.builtin.authorized_key:
+#    user: "{{ item.name }}"
+#    state: present
+#    key: "{{ item.ssh_key }}"
+#  loop: "{{ users }}"
+#  when: item.ssh_key is defined
 
 - name: Manage sudoers file entries
   ansible.builtin.copy:

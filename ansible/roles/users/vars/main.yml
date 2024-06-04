@@ -15,10 +15,10 @@
         groups: ['users']
       - name: sangelina
         groups: ['']
-      - delete_users:
+ delete_users:
         - bjones
-      - disable_users:
+ disable_users:
         - jsmith
-      - change_shells:
+ change_shells:
           name: a1angel
           shell: /bin/zsh

@@ -44,6 +44,12 @@
   loop: "{{ users }}"
   when: item.sudoers_content is defined
 
+- name: Disable users
+  user:
+    name: "{{ item.name }}"
+    shell: "/sbin/nologin"
+  loop: "{{ disable_users }}"
+  
 - name: Delete users
   user:
     name: "{{ item.name }}"
@@ -51,12 +57,6 @@
     state: absent
     remove: yes
   loop: "{{ delete_users }}"
-
-- name: Disable users
-  user:
-    name: "{{ item.name }}"
-    shell: "/sbin/nologin"
-  loop: "{{ disable_users }}"
 
 - name: Change user shells
   ansible.builtin.user:

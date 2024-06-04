@@ -1,32 +1,35 @@
 ---
  users:
-      - name: jsmith
+      - name: afranklin
         home: "/home/jsmith"
-        comment: John Smith
+        comment: Agbanyo Franklin
         uid: 1040
         shell: /bin/bash
         groups: ['admin', 'users']
         sudoers_content: "john ALL=(ALL) NOPASSWD:ALL"
         ssh_key: "/home/jsmith/.ssh/id_rsa.pub"
       - name: bjones
-        comment: barbara jones
+        comment: Brendy Jones
         uid: 1060
         shell: /bin/sh
         groups: ['users']
-      - name: sangelina
+      - name: tinnocent
+        comment: Twizere Innocent
+        shell: /sbin/nologin
+      - name: evincent
+        comment: Eric Vincent
+        uid: 1050
         groups: ['']
- delete_users:
+ disable_users:
+      - name: afranklin
+        shell: /sbin/nologin
       - name: bjones
-        home: /home/bjones
-      - name: jsmith
-        home: "/home/jsmith"
-      - name: sangelina
-        home: /home/sangelina
-       # - bjones
-       # - jsmith
-       # - sangelina
- #disable_users:
- #       - jsmith
- #change_shells:
- #         name: a1angel
- #         shell: /bin/zsh
+        shell: /sbin/nologin
+ delete_users:    
+      - name: tinnocent
+        home: /home/tinnocent
+      - name: evincent
+        home: /home/evincent
+ change_shells:
+        name: bjones
+        shell: /bin/zsh

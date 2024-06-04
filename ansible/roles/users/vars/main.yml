@@ -20,5 +20,5 @@
       - disable_users:
         - jsmith
       - change_shells:
-        - name: a1angel
+          name: a1angel
           shell: /bin/zsh

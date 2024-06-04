@@ -16,9 +16,15 @@
       - name: sangelina
         groups: ['']
  delete_users:
-        - bjones
-        - jsmith
-        - sangelina
+      - name: bjones
+        home: /home/bjones
+      - name: jsmith
+        home: "/home/jsmith"
+      - name: sangelina
+        home: /home/sangelina
+       # - bjones
+       # - jsmith
+       # - sangelina
  #disable_users:
  #       - jsmith
  #change_shells:

@@ -7,7 +7,7 @@
   loop: "{{ users | map(attribute='name') | list }}"
 
 - name: Create new users
-  ansible.builtin.user:
+  user:
     name: "{{ item.name }}"
     create_home: true
     comment: "{{ item.comment | default(omit) }}"
@@ -21,7 +21,7 @@
   when: item.name not in users_check.results | selectattr('failed', 'equalto', False) | map(attribute='item') | list     
 
 - name: Add users to groups
-  ansible.builtin.user:
+  user:
     name: "{{ item.name }}"
     groups: "{{ item.groups | join(',') }}"
     append: yes
@@ -37,7 +37,7 @@
 #  when: item.ssh_key is defined
 
 - name: Manage sudoers file entries
-  ansible.builtin.copy:
+  copy:
     dest: "/etc/sudoers.d/{{ item.name }}"
     content: "{{ item.sudoers_content }}"
     mode: '0440'
@@ -45,14 +45,15 @@
   when: item.sudoers_content is defined
 
 - name: Delete users
-  ansible.builtin.user:
+  user:
     name: "{{ item.name }}"
     home: "{{ item.home }}"
     state: absent
+    remove: yes
   loop: "{{ delete_users }}"
 
 - name: Disable users
-  ansible.builtin.user:
+  user:
     name: "{{ item.name }}"
     shell: "/sbin/nologin"
   loop: "{{ disable_users }}"

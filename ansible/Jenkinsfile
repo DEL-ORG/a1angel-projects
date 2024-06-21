@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'static_agent'
+    }
 
     environment {
         ANSIBLE_HOST_KEY_CHECKING = 'False'

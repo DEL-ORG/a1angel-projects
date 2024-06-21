@@ -1,0 +1,88 @@
+pipeline {
+    agent any
+
+    environment {
+        ANSIBLE_HOST_KEY_CHECKING = 'False'
+        ANSIBLE_CONFIG = "${WORKSPACE}/ansible/a1franklin/ansible/ansible.cfg"
+    }
+
+    parameters {
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'The branch to clone from the repository')
+    }
+
+    stages {
+        stage('Install Ansible and Dependencies') {
+            steps {
+                script {
+                    installAnsible()
+                }
+            }
+        }
+
+        stage('Create ansible user and configure sudo') {
+            steps {
+                script {
+                    sh '''
+                    sudo useradd -m -s /bin/bash ansible || true
+                    echo 'ansible ALL=(ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers.d/ansible || true
+                    '''
+                }
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                dir("${WORKSPACE}/ansible") {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: "*/${params.BRANCH_NAME}"]],
+                        doGenerateSubmoduleConfigurations: false,
+                        extensions: [[$class: 'LocalBranch']],
+                        submoduleCfg: [],
+                        userRemoteConfigs: [[
+                            url: 'https://github.com/DEL-ORG/a1franklin.git',
+                            // credentialsId: 'github-auth'
+                        ]]
+                    ])
+                }
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'ansible-test', keyFileVariable: 'SSH_PRIVATE_KEY')]) {
+                    script {
+                        sh '''
+                        cd "${WORKSPACE}/ansible/ansible"
+                        ansible-playbook -i inventory.yml -e "ANSIBLE_CONFIG=${ANSIBLE_CONFIG}" playbook.yml --private-key=$SSH_PRIVATE_KEY -vvv
+                        '''
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'The playbook ran successfully.'
+        }
+        failure {
+            echo 'The playbook failed.'
+        }
+    }
+}
+
+// Function to install Ansible and dependencies
+def installAnsible() {
+    sh '''
+    sudo apt update -y
+    sudo apt install -y python3 python3-pip
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3 get-pip.py --user
+    python3 -m pip install --user ansible
+    python3 -m pip install --user ansible-core
+    pip3 install --user boto3
+    pip install boto3 botocore
+    /usr/bin/python3 -m pip install boto3 botocore
+    '''
+}
